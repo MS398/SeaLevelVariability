@@ -70,6 +70,11 @@ load('./output/hourly.mat')
 
 for i = 1:length(hourly)
     fig_powerspectra(hourly(i).raw(:,2),hourly(i).raw(:,1),hourly(i).lat);
+    % Save figure to file dialog box
+    display(sprintf('Saving figure to file...'))
+    [filename,pathname]=uiputfile('*.png','Save power spectra of station as (*.png)');
+    saveas(gcf,[pathname filename]);
+    display(sprintf('Figure saved to %s%s',pathname,filename))
 end
 
 %% 4. TIDAL COMPONENTS ANALYSIS WITH t_tide() 
