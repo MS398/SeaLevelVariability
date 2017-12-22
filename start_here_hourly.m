@@ -158,10 +158,11 @@ z = tidemat(selectrows,3);
 % zi = griddata(x,y,z, xi,yi);
 % m_contourf(xi,yi,zi)
 % m_pcolor(xi,yi,zi); shading flat; colorbar
-points = m_scatter(x,y,45,z,'filled')
+points = m_scatter(x,y,45,z,'filled','MarkerEdgeColor',[0 0 0])
 colormap parula
 h = colorbar; ylabel(h,'(M_2+S_2) / (O_1+K_1)')
 
+%%
 % Save figure to file dialog box
 display(sprintf('Saving figure to file...'))
 [filename,pathname]=uiputfile('*.png','Save map of statiions as (*.png)');

@@ -237,7 +237,8 @@ h1=figure();
 xlims=[116 128];    % longitude limits (deg E)
 ylims=[4 20];       % latitude limits (deg N)
 m_proj('mercator','lon',xlims,'lat',ylims); % map projection
-m_gshhs_i()         % Generate coastline
+%m_gshhs_i()         % Generate coastline
+m_gshhs_f('patch',[.5 .5 .5],'edgecolor','none')
 m_grid
 hold on
 
@@ -249,13 +250,14 @@ x = soireg(selectrows,1);
 y = soireg(selectrows,2);
 z = soireg(selectrows,3);
 
-[xi, yi] = meshgrid(...
-    linspace(min(x),max(x)),...
-    linspace(min(y),max(y)));
-
-zi = griddata(x,y,z, xi,yi);
+% [xi, yi] = meshgrid(...
+%     linspace(min(x),max(x)),...
+%     linspace(min(y),max(y)));
+% zi = griddata(x,y,z, xi,yi);
 %m_contourf(xi,yi,zi)
-m_pcolor(xi,yi,zi); shading flat; colorbar
+% m_pcolor(xi,yi,zi); shading flat; colorbar
+points = m_scatter(x,y,45,z,'filled','MarkerEdgeColor',[0 0 0])
+colormap parula
 h = colorbar; ylabel(h,'lag (month)')
 
 % Save figure to file dialog box
@@ -367,7 +369,8 @@ end
 % % % xlims=[116 128];    % longitude limits (deg E)
 % % % ylims=[4 20];       % latitude limits (deg N)
 % % % m_proj('mercator','lon',xlims,'lat',ylims); % map projection
-% % % m_gshhs_i()         % Generate coastline
+% % % % m_gshhs_i()         % Generate coastline
+% % % m_gshhs_f('patch',[.5 .5 .5],'edgecolor','none')
 % % % m_grid
 % % % hold on
 % % % 
@@ -379,15 +382,18 @@ end
 % % % y = pdoreg(selectrows,2);
 % % % z = pdoreg(selectrows,3);
 % % % 
-% % % [xi, yi] = meshgrid(...
-% % %     linspace(min(x),max(x)),...
-% % %     linspace(min(y),max(y)));
-% % % 
-% % % zi = griddata(x,y,z, xi,yi);
-% % % %m_contourf(xi,yi,zi)
-% % % m_pcolor(xi,yi,zi); shading flat; colorbar
+% % % % [xi, yi] = meshgrid(...
+% % % %     linspace(min(x),max(x)),...
+% % % %     linspace(min(y),max(y)));
 % % % % 
-% % % % % Save figure to file dialog box
+% % % % zi = griddata(x,y,z, xi,yi);
+% % % %m_contourf(xi,yi,zi)
+% % % % m_pcolor(xi,yi,zi); shading flat; colorbar
+% % % points = m_scatter(x,y,45,z,'filled','MarkerEdgeColor',[0 0 0])
+% % % colormap parula
+% % % h = colorbar; ylabel(h,'lag (month)')
+% % % % 
+% % % % % Save figure to file dialog boxs
 % % % % display(sprintf('Saving figure to file...'))
 % % % % [filename,pathname]=uiputfile('*.png','Save map of stations as (*.png)');
 % % % % saveas(h1,[pathname filename]);
