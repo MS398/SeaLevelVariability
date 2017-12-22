@@ -140,7 +140,8 @@ h1=figure();
 xlims=[116 128];    % longitude limits (deg E)
 ylims=[4 20];       % latitude limits (deg N)
 m_proj('mercator','lon',xlims,'lat',ylims); % map projection
-m_gshhs_i()         % Generate coastline
+%m_gshhs_i()         % Generate coastline
+m_gshhs_f('patch',[.5 .5 .5],'edgecolor','none') 
 m_grid
 hold on
 
@@ -151,13 +152,14 @@ x = tidemat(selectrows,1);
 y = tidemat(selectrows,2);
 z = tidemat(selectrows,3);
 
-[xi, yi] = meshgrid(...
-    linspace(min(x),max(x)),...
-    linspace(min(y),max(y)));
-
-zi = griddata(x,y,z, xi,yi);
-%m_contourf(xi,yi,zi)
-m_pcolor(xi,yi,zi); shading flat; colorbar
+% [xi, yi] = meshgrid(...
+%     linspace(min(x),max(x)),...
+%     linspace(min(y),max(y)));
+% zi = griddata(x,y,z, xi,yi);
+% m_contourf(xi,yi,zi)
+% m_pcolor(xi,yi,zi); shading flat; colorbar
+points = m_scatter(x,y,45,z,'filled')
+colormap parula
 h = colorbar; ylabel(h,'(M_2+S_2) / (O_1+K_1)')
 
 % Save figure to file dialog box
